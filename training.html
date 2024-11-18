@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Learn various topics with interactive videos and guides">
+    <meta name="author" content="Bravin Ojweke">
+    <title>Learning Hub</title>
+    <link rel="stylesheet" href="/css/training.css">
+    <link rel="icon" href="img/logo.png" type="image/png">
+</head>
+<body>
+    <!-- Navigation starts -->
+    <nav>
+        <div class="menu-container nav-wrapper">
+            <div class="brand">
+                <a href="index.html">
+                    <img src="img/logo.png" alt="Insurance Logo" border="0">
+                </a>
+            </div>
+
+            <div class="hamberger" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <ul class="nav-list">
+                <li class="active"><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="training.html">Training</a></li>
+                <li>
+                    <a href="insurance.html">Insurance</a>
+                    <ul class="dropdown-list">
+                        <li><a href="insurance-details.html">Health Policy</a></li>
+                        <li><a href="insurance-details.html">Motorbike Policy</a></li>
+                        <li><a href="insurance-details.html">Death Policy</a></li>
+                    </ul>
+                </li>
+                <li><a href="news.html">News</a></li>
+                <li><a href="contact.html">Contacts</a></li>
+                <li>
+                    <button class="btn">
+                        <a href="tel:254798942939">+254 798942939</a>
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!-- Navigation ends -->
+
+    <div class="container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <h2>Topics</h2>
+            <ul id="topic-list">
+                <li><a href="#" data-topic="dQw4w9WgXcQ">How to ride</a></li>
+				<li><a href="#" data-topic="3fumBcKC6RE">Road safety</a></li>
+                <li><a href="#" data-topic="1zYwPp7P4iE">First Aid</a></li>
+                <li><a href="#" data-topic="5qap5aO4i9A">Rights</a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Content Area -->
+        <div class="content">
+            <h1 id="topic-title">Welcome to the Learning Hub</h1>
+            <p id="topic-description">Select a topic from the sidebar to start learning.</p>
+
+            <!-- Video Embed Section -->
+            <div class="video-container" id="video-container">
+                <iframe id="video-frame" width="560" height="315" src="" title="YouTube video player" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen></iframe>
+            </div>
+
+            <!-- Form to Add More Videos (Visible only to admins) -->
+            <div class="add-video-form" id="add-video-form" style="display: none;">
+                <h3>Add a Video</h3>
+                <input type="text" id="video-url" placeholder="Enter YouTube video URL" />
+                <button id="add-video-btn" class="btn">Add Video</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/training.js"></script>
+    <script>
+        // Define user role (for demonstration purposes)
+        const userRole = "admin"; // Change to "user" to test non-admin behavior
+
+        // Video data structure
+        const topics = {
+            "How to ride": ["dQw4w9WgXcQ"],
+            "Road safety": ["3fumBcKC6RE"],
+            "First Aid": ["1zYwPp7P4iE"],
+            "Rights": ["5qap5aO4i9A"]
+        };
+
+        // Add event listener to the hamburger menu
+        document.querySelector('.hamberger').addEventListener('click', function() {
+            document.querySelector('.nav-list').classList.toggle('active');
+        });
+
+        // Function to load videos for the selected topic
+        function loadVideos(topic) {
+            const videoContainer = document.getElementById('video-container');
+            videoContainer.innerHTML = ''; // Clear existing videos
+            topics[topic].forEach(videoId => {
+                const iframe = document.createElement('iframe');
+                iframe.width = "560";
+                iframe.height = "315";
+                iframe.src = `https://www.youtube.com/embed/${videoId}`;
+                iframe.frameBorder = "0";
+                iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+                iframe.allowFullscreen = true;
+                videoContainer.appendChild(iframe);
+            });
+        }
+
+        // Add event listener to the topic links
+        document.querySelectorAll('.sidebar a').forEach(function(link) {
+            link.addEventListener('click', function(event) {
+                event.preventDefault(); // Prevent default anchor behavior
+
+                // Get the topic name
+                const topicName = link.innerHTML;
+
+                // Update the topic title and description
+                document.getElementById('topic-title').innerHTML = topicName;
+                document.getElementById('topic-description').innerHTML = 'This is the description for ' + topicName;
+
+                // Load videos for the selected topic
+                loadVideos(topicName);
+            });
+        });
+
+        // Show the Add Video section only for admins
+        if (userRole === "admin") {
+            document.getElementById('add-video-form').style.display = 'block';
+        }
+
+        // Add event listener for adding new videos
+        document.getElementById('add-video-btn').addEventListener('click', function() {
+            const videoUrl = document.getElementById('video-url').value;
+            const videoId = videoUrl.split('v=')[1]?.split('&')[0]; // Extract video ID from URL
+
+            // Get the current topic
+            const currentTopic = document.getElementById('topic-title').innerHTML;
+
+            if (videoId && topics[currentTopic]) {
+                topics[currentTopic].push(videoId); // Add the new video ID to the current topic
+                loadVideos(currentTopic); // Reload videos to show the new one
+                document.getElementById('video-url').value = ''; // Clear input field
+            } else {
+                alert('Please enter a valid YouTube video URL.');
+            }
+        });
+    </script>
+</body>
+</html>

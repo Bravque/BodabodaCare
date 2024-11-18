@@ -1,0 +1,102 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  padding: 0;
+}
+body {
+  margin: 0; /* Remove default margin */
+  height: 100vh; /* Full height */
+  background-image: url('/img/hero-bg.jpg'); /* Set your image path here */
+  background-size: cover; /* Cover the entire viewport */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Prevent the image from repeating */
+  display: flex; /* Center content */
+  justify-content: center;
+  align-items: center;
+}
+
+.form-container {
+  position: relative; /* Change to relative for layering */
+  z-index: 1000; /* Ensure it appears above background */
+  background: rgba(255, 255, 255, 0.8); /* Optional: Add a semi-transparent background to the form */
+  padding: 20px; /* Padding for the form */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Shadow for depth */
+}
+
+.form-container {
+  position: fixed;
+  top: 20px;
+  left: 5%; /* Adjust left position */
+  right: 5%; /* Adjust right position */
+  bottom: 20px; /* Keep some space at the bottom */
+  width: 90%; /* Responsive width */
+  max-width: 600px; /* Maximum width */
+  overflow-y: auto; /* Scroll if content exceeds height */
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.9);
+  margin: 50px auto;
+  padding: 20px;
+
+}
+
+h2 {
+  text-align: center;
+  color: #251963;
+}
+
+.section {
+  margin-bottom: 20px;
+}
+
+h3 {
+  color: #251963;
+  border-bottom: 2px solid #00bfff;
+  padding-bottom: 5px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+input[type="text"],
+input[type="tel"],
+input[type="email"],
+input[type="date"],
+input[type="number"],
+select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+input:focus,
+select:focus {
+  border-color: #00bfff;
+  outline: none;
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 10px;
+  background-color: #251963;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+.submit-btn:hover {
+  background-color: #00bfff;
+}

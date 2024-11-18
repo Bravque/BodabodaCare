@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="BodaCare is an agency that focuses on road safety among boda boda operators and insures them against accidents.">
+    <meta name="keywords" content="motorbike insurance, road safety, boda care, bodacare, bodaboda insurance">
+    <meta name="author" content="Bravio - Bravin Ojweke | Software Developer">
+    <title>BodabodaCare Registration Form</title>
+    <link rel="stylesheet" href="/css/register.css">
+</head>
+<body>
+
+<div class="form-container">
+    <h2>BodabodaCare Registration Form</h2>
+    <form action="/submit_registration" method="POST">
+
+        <!-- Personal Information Section -->
+        <div class="section">
+            <h3>Personal Information</h3>
+            <div class="form-group">
+                <label for="fullName">Full Name:</label>
+                <input type="text" id="fullName" name="fullName" placeholder="Enter your full name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="dob">Date of Birth:</label>
+                <input type="date" id="dob" name="dob" required>
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Phone Number:</label>
+                <input type="tel" id="phone" name="phone" placeholder="e.g. +254712345678" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email Address:</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="idNumber">National ID/Passport Number:</label>
+                <input type="text" id="idNumber" name="idNumber" placeholder="Enter your ID/Passport number" required>
+            </div>
+             <!-- ID Upload Section -->
+        <div class="section">
+            <div class="form-group">
+                <label for="idUpload">Upload ID:</label>
+                <input type="file" id="idUpload" name="idUpload" accept="image/*" required>
+            </div>
+        </div>
+        <!-- Passport Photo Upload Section -->
+        <div class="section">
+            <div class="form-group">
+                <label for="passportPhoto">Upload Passport Photo:</label>
+                <input type="file" id="passportPhoto" name="passportPhoto" accept="image/*" required>
+            </div>
+        </div>
+            
+        </div>
+
+        <!-- Address Information Section -->
+        <div class="section">
+            <h3>Address Information</h3>
+            <div class="form-group">
+                <label for="address">Residential Address:</label>
+                <input type="text" id="address" name="address" placeholder="Enter your residential address" required>
+            </div>
+
+            <div class="form-group">
+                <label for="city">City/Town:</label>
+                <input type="text" id="city" name="city" placeholder="Enter your city or town" required>
+            </div>
+
+            <div class="form-group">
+                <label for="postalCode">Postal Code:</label>
+                <input type="text" id="postalCode" name="postalCode" placeholder="Enter your postal code" required>
+            </div>
+
+            <div class="form-group">
+                <label for="country">Country:</label>
+                <select id="country" name="country" required>
+                    <option value="">Select Country</option>
+                    <option value="Canada">Canada</option>
+                    <option value="Kenya">Kenya</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Motorbike Details Section -->
+        <div class="section">
+            <h3>Motorbike Details</h3>
+            <div class="form-group">
+                <label for="bikeModel">Bike Make & Model:</label>
+                <input type="text" id="bikeModel" name="bikeModel" placeholder="Enter your bike make and model" required>
+            </div>
+
+            <div class="form-group">
+                <label for="yearManufacture">Year of Manufacture:</label>
+                <input type="number" id="yearManufacture" name="yearManufacture" placeholder="e.g. 2020" required>
+            </div>
+
+            <div class="form-group">
+                <label for="engineNumber">Engine Number:</label>
+                <input type="text" id="engineNumber" name="engineNumber" placeholder="Enter engine number" required>
+            </div>
+
+            <div class="form-group">
+                <label for="chassisNumber">Chassis Number:</label>
+                <input type="text" id="chassisNumber" name="chassisNumber" placeholder="Enter chassis number" required>
+            </div>
+
+            <div class="form-group">
+                <label for="registrationNumber">Motorbike Registration Number:</label>
+                <input type="                <input type="text" id="registrationNumber" name="registrationNumber" placeholder="Enter registration number" required>
+            </div>
+
+             <!-- Motorbike Images Upload Section -->
+        <div class="section">
+            <div class="form-group">
+                <label for="motorbikeImages">Upload Motorbike Images (3 images):</label>
+                <input type="file" id="motorbikeImages" name="motorbikeImages" accept="image/*" multiple required>
+                <small>Please select exactly 3 images.</small>
+            </div>
+        </div>
+        </div>
+
+
+        <!-- Insurance Plan Section -->
+        <div class="section">
+            <h3>Insurance Plan</h3>
+            <div class="form-group">
+                <label for="coverageType">Coverage Type:</label>
+                <select id="coverageType" name="coverageType" required>
+                    <option value="">Select Coverage</option>
+                    <option value="Accident">>Accident</option>
+                    <option value="Sickness">>Death</option>
+                    <option value="Comprehensive">>Premium</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="planDuration">Plan Duration:</label>
+                <select id="planDuration" name="planDuration" required>
+                    <option value="">Select Duration</option>
+                    <option value="1 months">1 months</option>
+                    <option value="6 months">6 months</option>
+                    <option value="12 months">12 months</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="submit-btn">Submit</button>
+    </form>
+    
+</div>
+
+</body>
+</html>

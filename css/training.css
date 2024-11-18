@@ -1,0 +1,91 @@
+/* Basic styles for better visuals */
+:root
+{
+	/*------------ Colors -------------*/
+	--primary-color: #963cdd;     /*---- Purple ----*/
+	--secondary-color: #1668b8;   /*---- Blue ------*/
+	--third-color: #000000;       /*----- Black ------*/
+	--fourth-color: #ffffff;      /*---- White ------*/
+	--blue-color: #2540ce;    /*---- Button Blue -----*/
+	--yellow-color: #fcb900;  /*---- Button Yello ----*/
+
+
+	/*------------ Font Size --------------*/
+	--heading-font-size: 1.5rem;
+	--paragraph-font-size: 1rem;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: var(--fourth-color);
+}
+
+.brand img{
+  width: 5rem;
+  height: 5rem;
+}
+nav {
+  background-color: var(--secondary-color);
+  color: #fff;
+  padding: 10px;
+  height: 10%;
+  position: fixed;
+}
+
+.menu-container.nav-wrapper{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+nav .nav-list {
+  list-style: none;
+  padding: 0;
+}
+nav .nav-list li {
+  display: inline;
+  margin-right: 15px;
+}
+nav .nav-list a {
+  color: #fff;
+  text-decoration: none;
+}
+.container {
+  display: flex;
+  margin: 20px;
+}
+.sidebar {
+  width: 15%;
+  background: #fff;
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.content {
+  width: 75%;
+  padding: 15px;
+  background: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-left: 20px;
+}
+.video-container {
+  margin-top: 20px;
+}
+.btn {
+  background-color: var(--yellow-color);
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.btn a {
+  color: white;
+  text-decoration: none;
+}
+.add-video-form {
+  margin-top: 20px;
+}
