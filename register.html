@@ -8,12 +8,13 @@
     <meta name="author" content="Bravio - Bravin Ojweke | Software Developer">
     <title>BodabodaCare Registration Form</title>
     <link rel="stylesheet" href="/css/register.css">
+    
 </head>
 <body>
 
 <div class="form-container">
     <h2>BodabodaCare Registration Form</h2>
-    <form action="/submit_registration" method="POST">
+    <form id="frm-register" enctype="multipart/form-data" action="/submit_registration" method="POST">
 
         <!-- Personal Information Section -->
         <div class="section">
@@ -42,6 +43,17 @@
                 <label for="idNumber">National ID/Passport Number:</label>
                 <input type="text" id="idNumber" name="idNumber" placeholder="Enter your ID/Passport number" required>
             </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="create password" required>
+            </div>
+
+            <div class="form-group">
+                <label for="confirmPassword">Confirm Password</label>
+                <input type="Password" id="confirmPassword" name="confirmPassword" placeholder="confirm password" required>
+            </div>
+
              <!-- ID Upload Section -->
         <div class="section">
             <div class="form-group">
@@ -78,11 +90,11 @@
             </div>
 
             <div class="form-group">
-                <label for="country">Country:</label>
-                <select id="country" name="country" required>
-                    <option value="">Select Country</option>
-                    <option value="Canada">Canada</option>
-                    <option value="Kenya">Kenya</option>
+                <label for="county">County:</label>
+                <select id="county" name="county" required>
+                    <option value="">Select Sub-County</option>
+                    <option value="SunaEast">Suna East</option>
+                    <option value="SunaWest">Suna West</option>
                 </select>
             </div>
         </div>
@@ -112,7 +124,7 @@
 
             <div class="form-group">
                 <label for="registrationNumber">Motorbike Registration Number:</label>
-                <input type="                <input type="text" id="registrationNumber" name="registrationNumber" placeholder="Enter registration number" required>
+                <input type="text" id="registrationNumber" name="registrationNumber" placeholder="Enter registration number" required>
             </div>
 
              <!-- Motorbike Images Upload Section -->
@@ -155,6 +167,74 @@
     </form>
     
 </div>
+
+<script>
+    document.getElementById('frm-register').addEventListener('submit', function (event) {
+        // Prevent form submission
+        event.preventDefault();
+
+        // Gather form inputs
+        const fullName = document.getElementById('fullName').value.trim();
+        const dob = document.getElementById('dob').value;
+        const phone = document.getElementById('phone').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const idNumber = document.getElementById('idNumber').value.trim();
+        const password = document.getElementById('password').value;
+        const confirmPassword = document.getElementById('confirmPassword').value;
+        const idUpload = document.getElementById('idUpload').files.length;
+        const passportPhoto = document.getElementById('passportPhoto').files.length;
+        const address = document.getElementById('address').value.trim();
+        const city = document.getElementById('city').value.trim();
+        const postalCode = document.getElementById('postalCode').value.trim();
+        const county = document.getElementById('county').value;
+        const bikeModel = document.getElementById('bikeModel').value.trim();
+        const yearManufacture = document.getElementById('yearManufacture').value;
+        const engineNumber = document.getElementById('engineNumber').value.trim();
+        const chassisNumber = document.getElementById('chassisNumber').value.trim();
+        const registrationNumber = document.getElementById('registrationNumber').value.trim();
+        const motorbikeImages = document.getElementById('motorbikeImages').files.length;
+        const coverageType = document.getElementById('coverageType').value;
+        const planDuration = document.getElementById('planDuration').value;
+
+        // Validation rules
+        let errors = [];
+
+        if (!fullName) errors.push("Full Name is required.");
+        if (!dob) errors.push("Date of Birth is required.");
+        if (!phone || !/^\+254\d{9}$/.test(phone)) errors.push("Enter a valid phone number (e.g., +254712345678).");
+        if (!email || !/^\S+@\S+\.\S+$/.test(email)) errors.push("Enter a valid email address.");
+        if (!idNumber) errors.push("National ID/Passport Number is required.");
+        if (!password || password.length < 8) errors.push("Password must be at least 8 characters long.");
+        if (password !== confirmPassword) errors.push("Passwords do not match.");
+        if (idUpload !== 1) errors.push("Please upload exactly 1 ID.");
+        if (passportPhoto !== 1) errors.push("Please upload exactly 1 passport photo.");
+        if (!address) errors.push("Residential Address is required.");
+        if (!city) errors.push("City/Town is required.");
+        if (!postalCode) errors.push("Postal Code is required.");
+        if (!county) errors.push("Sub-County is required.");
+        if (!bikeModel) errors.push("Bike Make & Model is required.");
+        if (!yearManufacture || yearManufacture < 1900 || yearManufacture > new Date().getFullYear()) {
+            errors.push("Enter a valid year of manufacture.");
+        }
+        if (!engineNumber) errors.push("Engine Number is required.");
+        if (!chassisNumber) errors.push("Chassis Number is required.");
+        if (!registrationNumber) errors.push("Motorbike Registration Number is required.");
+        if (motorbikeImages !== 3) errors.push("Please upload exactly 3 motorbike images.");
+        if (!coverageType) errors.push("Coverage Type is required.");
+        if (!planDuration) errors.push("Plan Duration is required.");
+
+        // Display errors or submit form
+        if (errors.length > 0) {
+            alert("Please fix the following errors:\n" + errors.join("\n"));
+        } else {
+            alert("Form submitted successfully!");
+            this.submit();
+        }
+    });
+</script>
+
+
+<script src="script.js"></script>
 
 </body>
 </html>

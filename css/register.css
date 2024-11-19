@@ -100,3 +100,81 @@ select:focus {
 .submit-btn:hover {
   background-color: #00bfff;
 }
+
+/* For devices with width <= 768px (Tablets) */
+@media (max-width: 768px) {
+  .form-container {
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    width: 100%;
+    max-width: none; /* Remove max-width for smaller screens */
+  }
+
+  h2 {
+    font-size: 24px;
+  }
+
+  .form-group input,
+  .form-group select {
+    font-size: 14px;
+    padding: 12px;
+  }
+
+  .submit-btn {
+    font-size: 18px;
+    padding: 12px;
+  }
+
+  /* Adjust the padding of the form container */
+  .form-container {
+    padding: 15px;
+  }
+}
+
+/* For devices with width <= 480px (Mobile Phones) */
+@media (max-width: 480px) {
+  .form-container {
+    padding: 10px;
+    width: 100%;
+    margin: 10px;
+  }
+
+  h2 {
+    font-size: 20px;
+  }
+
+  .form-group input,
+  .form-group select {
+    font-size: 12px;
+    padding: 10px;
+  }
+
+  .submit-btn {
+    font-size: 16px;
+    padding: 12px;
+  }
+}
+
+/* For very small devices like <= 400px */
+@media (max-width: 400px) {
+  .form-container {
+    padding: 8px;
+  }
+
+  h2 {
+    font-size: 18px;
+  }
+
+  .form-group input,
+  .form-group select {
+    font-size: 12px;
+    padding: 8px;
+  }
+
+  .submit-btn {
+    font-size: 14px;
+    padding: 10px;
+  }
+}
