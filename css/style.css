@@ -407,6 +407,13 @@ nav ul.dropdown-list {
 }
 
 /*----------------- Services Section Styling ---------------*/
+.container {
+    width: 100%;
+    max-width: 1200px; /* Limit width for larger screens */
+    margin: 0 auto; /* Center the container */
+    padding: 0 1.5rem; /* Add padding for spacing */
+}
+
 .road-safety {
     margin-bottom: 2rem; /* Space between Road Safety and Insurance Solutions */
 }
@@ -423,21 +430,18 @@ nav ul.dropdown-list {
     object-fit: cover;
 }
 
-.our-services .services {
-    margin: 0; /* Removed unnecessary top and bottom margin */
-    display: flex;
-    flex-wrap: wrap; /* Ensures responsive layout */
-    gap: 1.5rem; /* Spacing between services */
-    justify-content: space-between; /* Align services neatly */
+.services .service {
+    padding: 1.5rem;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
+    border-radius: 10px;
+    margin: 0; /* Ensure no additional margin */
 }
 
 .services .service {
-    border: none;
-    border-radius: 10px;
     padding: 1.5rem;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
-    flex: 1 1 calc(30% - 1rem); /* Ensures consistent width and spacing */
-    max-width: calc(30% - 1rem); /* Prevents items from growing too large */
+    border-radius: 10px;
+    margin: 0; /* Ensure no additional margin */
 }
 
 .services .service:hover {
@@ -447,6 +451,7 @@ nav ul.dropdown-list {
 .service img {
     max-width: 100%;
     height: 15rem;
+    object-fit: cover;
 }
 
 .service .service-heading {
@@ -461,6 +466,23 @@ nav ul.dropdown-list {
 .our-services.container h2 {
     margin-top: 5rem;
 }
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+    .our-services .services  {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* 2 columns on medium screens */
+    }
+
+}
+
+@media (max-width: 768px) {
+    .our-services .services  {
+        display: grid;
+        grid-template-columns: 1fr; /* 1 column on small screens */
+    }
+}
+
 
 /*----------------- Overline Section Styling ---------------*/
 .overline {
@@ -538,7 +560,7 @@ nav ul.dropdown-list {
 
 /* Fixed size for each image, maintaining the aspect ratio */
 .partner-img-container {
-    width: 30%;  /* 3 items per row */
+    width: 10rem;  /* 3 items per row */
     height: 200px;  /* Fixed height */
     overflow: hidden;
     position: relative;
@@ -553,6 +575,18 @@ nav ul.dropdown-list {
 @media (max-width: 480px) {
     .partner-img-container {
         width: 100%;  /* 1 item per row */
+    }
+}
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+    .services .partners-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns on medium screens */
+    }
+}
+
+@media (max-width: 768px) {
+    .services .partners-grid {
+        grid-template-columns: 1fr; /* 1 column on small screens */
     }
 }
 
@@ -632,6 +666,7 @@ nav ul.dropdown-list {
     width: 50px;
     height: 2px;
     background: #ffffff;
+    
 }
 
 .footer-column ul {
@@ -657,6 +692,11 @@ nav ul.dropdown-list {
 
 .footer-column ul li a:hover {
     color: #00bfff;
+}
+
+.footer-column .social-links {
+    text-align: left; 
+    margin-top: 1rem; /* Ensures that the links are centered */
 }
 
 .footer-column .social-links a {
@@ -732,13 +772,33 @@ nav ul.dropdown-list {
 .footer-bottom .credit a:hover {
     color: #ffffff;
 }
-
 @media (max-width: 768px) {
     .footer-container {
         grid-template-columns: 1fr;
         text-align: center;
     }
+
+    .footer-column h4::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 80px; /* Adjust the underline width */
+        height: 2px;
+        background: #ffffff;
+        margin: 0 auto; /* Centers the underline horizontally */
+    }
+
+    .footer-column .social-links {
+        text-align: center; /* Center the icons */
+    }
+
+    .footer-column .social-links a {
+        margin: 0 8px; /* Ensure consistent spacing between icons */
+    }
 }
+
 
 
 
@@ -840,7 +900,6 @@ nav ul.dropdown-list {
 
     .services, .partners-grid {
         display: grid;
-        grid-template-rows: repeat(2, 1fr);
         grid-template-columns: repeat(3, 1fr);
         grid-gap: 2rem;
     }
