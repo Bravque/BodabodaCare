@@ -5,101 +5,107 @@ const path = require('path');
 const fs = require('fs');
 const multer = require('multer')
 
+// Configure Multer for file uploads
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, 'uploads/'); // Directory for uploads
+    },
+    filename: (req, file, cb) => {
+        cb(null, Date.now() + '-' + file.originalname.replace(/\s+/g, '_')); // Unique filename
+    }
+});
+
+const upload = multer({
+    storage: storage,
+    limits: { fileSize: 5 * 1024 * 1024 }, // 5 MB file size limit
+    fileFilter: (req, file, cb) => {
+        const allowedTypes = ['image/jpeg', 'image/png', 'image/jpg'];
+        if (!allowedTypes.includes(file.mimetype)) {
+            return cb(new Error('Invalid file type! Only JPG, PNG allowed.'));
+        }
+        cb(null, true);
+    }
+});
+
 // User registration function
-exports.registerUser = async (request, response) => {
-    // Fetch data from the request body
-    const {
-        fullName,
-        dob,
-        phone,
-        email,
-        idNumber,
-        password,
-        address,
-        city,
-        postalCode,
-        county,
-        bikeModel,
-        yearManufacture,
-        engineNumber,
-        chassisNumber,
-        registrationNumber,
-        coverageType,
-        planDuration
-    } = request.body;
-
-    // Handle uploaded files
-    const { idUpload, passportPhoto, motorbikeImages } = request.files;
-
-    try {
-        // Check if user exists
-        const [rows] = await db.execute('SELECT * FROM users WHERE email = ?', [email]);
-        if (rows.length > 0) {
-            return response.status(400).json({ message: 'User already exists!' });
+exports.registerUser = (req, res) => {
+    
+    upload.fields([
+        { name: 'idUpload', maxCount: 1 },
+        { name: 'passportPhoto', maxCount: 1 },
+        { name: 'motorbikeImages', maxCount: 3 }
+    ])(req, res, async (err) => {
+        if (err) {
+            console.error('File upload error:', err);
+            return res.status(400).json({ message: err.message });
         }
 
-        // Hash password
-        const hashedPassword = await bcrypt.hash(password, 10);
+        const {
+            fullName, dob, phone, email, idNumber, password, address, city,
+            postalCode, county, bikeModel, yearManufacture, engineNumber,
+            chassisNumber, registrationNumber, coverageType, planDuration
+        } = req.body;
 
-         // Save uploaded files
-         const idPath = `uploads/${Date.now()}_${idUpload[0].originalname}`;
-         const passportPath = `uploads/${Date.now()}_${passportPhoto[0].originalname}`;
-         const motorbikePaths = motorbikeImages.map((file, index) =>
-             `uploads/${Date.now()}_${index}_${file.originalname}`
-         );
+        // Validate required fields
+        if (!fullName || !email || !password) {
+            return res.status(400).json({ message: 'Missing required fields!' });
+        }
 
-        // Move files to destination
-        fs.renameSync(idUpload[0].path, idPath);
-        fs.renameSync(passportPhoto[0].path, passportPath);
-        motorbikeImages.forEach((file, index) => {
-            fs.renameSync(file.path, motorbikePaths[index]);
-        });
+        // Get uploaded file paths
+        const idUpload = req.files.idUpload ? req.files.idUpload[0].path : null;
+        const passportPhoto = req.files.passportPhoto ? req.files.passportPhoto[0].path : null;
+        const motorbikeImages = req.files.motorbikeImages
+            ? req.files.motorbikeImages.map((file) => file.path)
+            : [];
 
-        // Insert record into database
-        await db.execute(
-            `INSERT INTO users (
-                fullName, dob, phone, email, idNumber, password, address, city, postalCode, county,
-                bikeModel, yearManufacture, engineNumber, chassisNumber, registrationNumber,
-                coverageType, planDuration, idUpload, passportPhoto, motorbikeImages
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-            [
-                fullName,
-                dob,
-                phone,
-                email,
-                idNumber,
-                hashedPassword,
-                address,
-                city,
-                postalCode,
-                county,
-                bikeModel,
-                yearManufacture,
-                engineNumber,
-                chassisNumber,
-                registrationNumber,
-                coverageType,
-                planDuration,
-                idPath,
-                passportPath,
-                motorbikePaths.join(',')
-            ]
-        );
+        try {
+            // Check if user exists
+            const [rows] = await db.execute('SELECT * FROM users WHERE email = ?', [email]);
+            if (rows.length > 0) {
+                return res.status(400).json({ message: 'User already exists!' });
+            }
 
-         // Insert personal images
-         await db.execute('INSERT INTO user_images (user_id, image_type, image_path) VALUES (?, ?, ?)', [userId, 'personal', idPath]);
-         await db.execute('INSERT INTO user_images (user_id, image_type, image_path) VALUES (?, ?, ?)', [userId, 'personal', passportPath]);
- 
-         // Insert motorbike images
-         for (let i = 0; i < motorbikePaths.length; i++) {
-             await db.execute('INSERT INTO user_images (user_id, image_type, image_path) VALUES (?, ?, ?)', [userId, 'motorbike', motorbikePaths[i]]);
-         }
+            // Hash password
+            const hashedPassword = await bcrypt.hash(password, 10);
 
-        response.status(201).json({ message: 'User registered successfully!' });
-    } catch (error) {
-        console.error(error); // Log the error to the console
-        response.status(500).json({ message: 'An error occurred!', error });
-    }
+            // Insert user into database
+            const [userResult] = await db.execute(
+                `INSERT INTO users (full_name, dob, phone, email, password) VALUES (?, ?, ?, ?, ?)`,
+                [fullName, dob, phone, email, hashedPassword]
+            );
+            const userId = userResult.insertId;
+            
+            // Insert personal information into database
+            await db.execute(
+                `INSERT INTO personalInformation (user_id, id_number, id_upload, passport_photo) VALUES (?, ?, ?, ?)`,
+                [userId, idNumber, idUpload, passportPhoto]
+            );
+
+            // Insert address information into database
+            await db.execute(
+                `INSERT INTO addressInformation (user_id, address, city, postal_code, county) VALUES (?, ?, ?, ?, ?)`,
+                [userId, address, city, postalCode, county] // Use `county` as `country` in your code
+            );
+
+            // Insert motorbike information into database
+            await db.execute(
+                `INSERT INTO motorbikeDetails (user_id, bike_model, year_manufacture, engine_number, chassis_number, registration_number, motorbike_images) VALUES (?, ?, ?, ?, ?, ?, ?)`,
+                [userId, bikeModel, yearManufacture, engineNumber, chassisNumber, registrationNumber, motorbikeImages.join(',')]
+            );
+
+            // Insert insurance plan details
+            await db.execute(
+                `INSERT INTO insurancePlans (user_id, coverage_type, plan_duration) VALUES (?, ?, ?)`,
+                [userId, coverageType, planDuration]
+            );
+            
+
+            res.status(201).json({ message: 'User registered successfully!' });
+        } catch (error) {
+            console.error('Error during registration:', error);
+            res.status(500).json({ message: 'Server error!', error });
+        }
+    });
 };
 
 // User login function

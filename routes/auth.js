@@ -1,15 +1,12 @@
-
 //import
 const express = require('express');
+const router = express.Router();
 const { registerUser, loginUser, logoutUser } = require('../controllers/authController');
 
 console.log(registerUser , loginUser , logoutUser );
 
-
-const router = express.Router();
-
 //user registration
-router.post('/register', registerUser );
+router.post('/submit_registration', registerUser ); // Corrected route
 
 //user login 
 router.post('/login', loginUser );

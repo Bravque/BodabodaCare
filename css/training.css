@@ -1,91 +1,111 @@
 /* Basic styles for better visuals */
-:root
-{
-	/*------------ Colors -------------*/
-	--primary-color: #963cdd;     /*---- Purple ----*/
-	--secondary-color: #1668b8;   /*---- Blue ------*/
-	--third-color: #000000;       /*----- Black ------*/
-	--fourth-color: #ffffff;      /*---- White ------*/
-	--blue-color: #2540ce;    /*---- Button Blue -----*/
-	--yellow-color: #fcb900;  /*---- Button Yello ----*/
+:root {
+  /*------------ Colors -------------*/
+  --primary-color: #963cdd;     /*---- Purple ----*/
+  --secondary-color: #1668b8;   /*---- Blue ------*/
+  --third-color: #000000;       /*----- Black ------*/
+  --fourth-color: #ffffff;      /*---- White ------*/
+  --blue-color: #2540ce;    /*---- Button Blue -----*/
+  --yellow-color: #fcb900;  /*---- Button Yellow ----*/
 
-
-	/*------------ Font Size --------------*/
-	--heading-font-size: 1.5rem;
-	--paragraph-font-size: 1rem;
+  /*------------ Font Size --------------*/
+  --heading-font-size: 1.5rem;
+  --paragraph-font-size: 1rem;
 }
 
 body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: var(--fourth-color);
+font-family: 'Arial', sans-serif; /* Use a more modern font */
+margin: 0;
+padding: 0;
+background-color: var(--fourth-color); /* Use a lighter background color */
+color: var(--third-color); /* Set text color for better contrast */
 }
 
-.brand img{
-  width: 5rem;
-  height: 5rem;
+.brand img {
+width: 5rem;
+height: 5rem;
 }
+
 nav {
-  background-color: var(--secondary-color);
-  color: #fff;
-  padding: 10px;
-  height: 10%;
-  position: fixed;
+background-color: var(--secondary-color); /* Keep the blue color */
+color: var(--fourth-color); /* Use white text */
+padding: 10px;
+height: 10%;
+position: fixed;
+width: 100%; /* Make the nav full width */
+z-index: 10; /* Ensure nav stays on top */
+display: flex; /* Use flexbox for better alignment */
+justify-content: space-between; /* Evenly space content */
+align-items: center; /* Center items vertically */
 }
 
-.menu-container.nav-wrapper{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.menu-container.nav-wrapper {
+display: flex;
+justify-content: space-between;
+align-items: center;
 }
 
 nav .nav-list {
-  list-style: none;
-  padding: 0;
+list-style: none;
+padding: 0;
+margin: 0; /* Remove default margin */
 }
+
 nav .nav-list li {
-  display: inline;
-  margin-right: 15px;
+display: inline-block; /* Make each item a block for better spacing */
+margin-right: 20px; /* Add space between items */
 }
+
 nav .nav-list a {
-  color: #fff;
-  text-decoration: none;
+color: var(--fourth-color); /* Use white text color */
+text-decoration: none;
+font-size: var(--paragraph-font-size); /* Adjust font size */
+transition: color 0.3s ease; /* Add a smooth transition for hover effect */
 }
+
+nav .nav-list a:hover {
+color: var(--primary-color); /* Change color on hover */
+}
+
 .container {
-  display: flex;
-  margin: 20px;
+display: flex;
+margin: 20px;
 }
+
 .sidebar {
-  width: 15%;
-  background: #fff;
-  padding: 15px;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+width: 20%; /* Adjust the sidebar width */
+background: var(--fourth-color); /* White background */
+padding: 15px;
+border-radius: 5px;
+box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+margin-top: 10%; /* Add spacing from the top */
 }
+
 .content {
-  width: 75%;
-  padding: 15px;
-  background: #fff;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  margin-left: 20px;
+width: 75%; /* Adjust the content area width */
+padding: 15px;
+background: var(--fourth-color); /* White background */
+border-radius: 5px;
+box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+margin-left: 20px;
+margin-top: 10%; /* Add spacing from the top */
 }
+
 .video-container {
-  margin-top: 20px;
+margin-top: 20px;
 }
+
 .btn {
-  background-color: var(--yellow-color);
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  border-radius: 5px;
-  cursor: pointer;
+background-color: var(--yellow-color); /* Keep the yellow button color */
+color: var(--fourth-color); /* Use white text */
+border: none;
+padding: 10px 15px;
+border-radius: 5px;
+cursor: pointer;
+font-size: var(--paragraph-font-size); /* Adjust font size */
+transition: background-color 0.3s ease; /* Add a smooth transition */
 }
+
 .btn a {
-  color: white;
-  text-decoration: none;
-}
-.add-video-form {
-  margin-top: 20px;
-}
+color: var(--fourth-color); /* Use white text color */
+text-decoration
