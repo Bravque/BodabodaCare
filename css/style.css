@@ -91,6 +91,7 @@ p {
 }
 
 /*-------------------------- Menu Style -------------------------*/
+
 .menu-container {
     width: 1152px;
     max-width: 90%;
@@ -244,7 +245,8 @@ nav ul.dropdown-list {
 }
 
 .mobile .nav-wrapper ul li:hover .dropdown-list {
-    height: max-content;
+    opacity: 1;
+    height: auto;
     padding-top: 6px;
 }
 
