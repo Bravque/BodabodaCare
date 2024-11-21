@@ -32,25 +32,6 @@ hamberger.addEventListener('click', function() {
     }
 });
 
-// Dynamic heading for registration Form
-document.addEventListener("DOMContentLoaded", () => {
-	const formSections = document.querySelectorAll(".form-section");
-	const heading = document.getElementById("dynamic-heading");
-	const form = document.getElementById("registration-form");
-
-	form.addEventListener("scroll", () => {
-		formSections.forEach((section) => {
-			const sectionTop = section.offsetTop - form.scrollTop;
-			const sectionHeight = section.offsetHeight;
-
-			if (sectionTop <= 20 && sectionTop + sectionHeight > 20) {
-				heading.textContent = section.getAttribute("data-title");
-			}
-		});
-	});
-});
-
-		
 
 		
 		
