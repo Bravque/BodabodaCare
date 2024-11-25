@@ -53,15 +53,25 @@ document.getElementById('frm-register').addEventListener('submit', async functio
         formData.append('motorbikeImages', file);
     });
 
-    // Send the data to the server
-    const response = await fetch('/auth/register', {
-        method: 'POST',
-        body: formData, // send the form data with files
-    });
+    try {
+        const response = await fetch('/auth/register', {
+            method: 'POST',
+            body: formData,
+        });
 
-    const data = await response.json();
+        // const data = await response.json();
 
-    alert(data.message); // Show response message
+        if (response.ok) {
+            alert(data.message); // Show success message
+            // Redirect to login.html
+            window.location.href = 'login.html';
+        } else {
+            alert(`Error: ${data.message}`); // Show error message
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        alert('An error occurred. Please try again.');
+    }
 });
 
 // Handle user login form submission
