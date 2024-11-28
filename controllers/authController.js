@@ -47,7 +47,7 @@ exports.registerUser = (req, res) => {
         } = req.body;
 
         // Validate required fields
-        if (!fullName || !email || !password) {
+        if (!fullName || !idNumber || !password) {
             return res.status(400).json({ message: 'Missing required fields!' });
         }
 
@@ -60,7 +60,7 @@ exports.registerUser = (req, res) => {
 
         try {
             // Check if user exists
-            const [rows] = await db.execute('SELECT * FROM users WHERE email = ?', [email]);
+            const [rows] = await db.execute('SELECT * FROM users WHERE idNumber = ?', [idNumber]);
             if (rows.length > 0) {
                 return res.status(400).json({ message: 'User already exists!' });
             }
@@ -70,8 +70,8 @@ exports.registerUser = (req, res) => {
 
             // Insert user into database
             const [userResult] = await db.execute(
-                `INSERT INTO users (full_name, dob, phone, email, password) VALUES (?, ?, ?, ?, ?)`,
-                [fullName, dob, phone, email, hashedPassword]
+                `INSERT INTO users (full_name, dob, phone, email, idNumber, password) VALUES (?, ?, ?, ?, ?)`,
+                [fullName, dob, phone, email, idNumber, hashedPassword]
             );
             const userId = userResult.insertId;
             
@@ -110,10 +110,10 @@ exports.registerUser = (req, res) => {
 
 // User login function
 exports.loginUser = async (request, response) => {
-    const { email, password } = request.body;
+    const { idNumber, password } = request.body;
     try {
         // Check if user exists
-        const [rows] = await db.execute('SELECT * FROM users WHERE email = ?', [email]);
+        const [rows] = await db.execute('SELECT * FROM users WHERE idNumber = ?', [idNumber]);
         if (rows.length === 0) {
             return response.status(400).json({ message: 'User not found! Please register.' });
         }
@@ -127,7 +127,7 @@ exports.loginUser = async (request, response) => {
         response.status(200).json({
             message: 'Login successful!',
             name: user.fullName,
-            email: user.email
+            email: user.idNumber
         });
     } catch (error) {
         response.status(500).json({ message: 'An error occurred!', error });

@@ -23,6 +23,13 @@
 
 </head>
 <body>
+    <!-- Scroll to top starts -->
+	<button id="topBtn">
+        <ion-icon name="arrow-up-outline"></ion-icon>
+    </button>
+
+
+  <!-- Scroll to top ends -->
     <!-- Navigation starts -->
     <nav>
         <div class="menu-container nav-wrapper">
@@ -170,6 +177,25 @@
 	
 	
 <!--------------- Footer ------------------>
+        <!------------------------ Scroll to top button -------------------->
+        <script>
+            $(document).ready(function(){
+                $(window).scroll(function(){
+                if($(this).scrollTop() > 40)
+                {
+                    $('#topBtn').fadeIn();
+                }
+                else
+                {
+                    $('#topBtn').fadeOut();
+                }
+                });
+
+                $("#topBtn").click(function(){
+                    $('html, body').animate({scrollTop: 0},800);
+                });             
+            });
+        </script>
 
     <script src="/js/responsive.js"></script>
 
