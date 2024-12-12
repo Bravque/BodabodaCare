@@ -60,8 +60,7 @@ BodaBodaCare aims to reduce financial risks for motorbike operators in Kenya and
    DATABASE_USER=your_database_user
    DATABASE_PASSWORD=your_database_password
    DATABASE_NAME=bodabodacare
-   JWT_SECRET=your_jwt_secret
-   PORT=3000
+   PORT=4000
    ```
 4. **Start the Server**:
    ```bash
