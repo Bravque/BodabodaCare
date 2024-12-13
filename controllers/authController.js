@@ -70,7 +70,7 @@ exports.registerUser = (req, res) => {
 
             // Insert user into database
             const [userResult] = await db.execute(
-                `INSERT INTO users (full_name, dob, phone, email, idNumber, password) VALUES (?, ?, ?, ?, ?)`,
+                `INSERT INTO users (full_name, dob, phone, email, idNumber, password) VALUES (?, ?, ?, ?, ?, ?)`,
                 [fullName, dob, phone, email, idNumber, hashedPassword]
             );
             const userId = userResult.insertId;
@@ -99,8 +99,11 @@ exports.registerUser = (req, res) => {
                 [userId, coverageType, planDuration]
             );
             
-
-            res.status(201).json({ message: 'User registered successfully!' });
+            // Send a JSON response with a success message and redirect URL
+            res.status(201).json({
+                message: 'Registration successful!',
+                redirect: 'http://127.0.0.1:4000/login.html' // Include the redirect URL in the response
+            }); 
         } catch (error) {
             console.error('Error during registration:', error);
             res.status(500).json({ message: 'Server error!', error });
@@ -124,10 +127,14 @@ exports.loginUser = async (request, response) => {
         if (!isMatch) {
             return response.status(400).json({ message: 'Invalid credentials!' });
         }
+
+
+        // Send a JSON response with a success message and redirect URL
         response.status(200).json({
             message: 'Login successful!',
             name: user.fullName,
-            email: user.idNumber
+            idNumber: user.idNumber,
+            redirect: 'http://127.0.0.1:4000/user.html' // Redirect to user dashboard
         });
     } catch (error) {
         response.status(500).json({ message: 'An error occurred!', error });

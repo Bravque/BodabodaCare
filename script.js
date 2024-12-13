@@ -68,8 +68,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
             const data = await response.json();
 
-            if (data.message === 'Login successful!') {
-                alert(`${data.message} Welcome ${data.name}, email: ${data.email}`);
+            if (response.ok) {
+                // If login is successful, redirect to the dashboard
+                window.location.href = data.redirect || '/user.html'; // Redirect to user dashboard
             } else {
                 alert(data.message); // Show error message on failed login
             }

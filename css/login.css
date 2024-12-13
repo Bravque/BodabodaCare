@@ -11,7 +11,10 @@ html, body{
   height: 100vh;
   width: 100%;
   place-items: center;
-  background: linear-gradient(to right, #99004d 0%, #ff0080 100%);
+  background-image: url('/img/about-bread.jpeg'); /* Replace with your image path */
+  background-size: cover; /* This will make the image cover the entire background */
+  background-position: center; /* This will center the image */
+  background-repeat: no-repeat; /* This prevents the image from repeating */
 }
 ::selection{
   background: #ff80bf;

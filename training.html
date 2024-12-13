@@ -74,32 +74,71 @@
         <aside class="sidebar">
             <h2>Topics</h2>
             <ul id="topic-list">
-                <li><a href="#" data-topic="dQw4w9WgXcQ">How to ride</a></li>
-				<li><a href="#" data-topic="3fumBcKC6RE">Road safety</a></li>
-                <li><a href="#" data-topic="1zYwPp7P4iE">First Aid</a></li>
-                <li><a href="#" data-topic="5qap5aO4i9A">Rights</a></li>
+                <li><a href="#" data-topic="how-to-ride" onclick="showVideos('how-to-ride')">How to Ride</a></li>
+                <li><a href="#" data-topic="road-safety" onclick="showVideos('road-safety')">Road Safety</a></li>
+                <li><a href="#" data-topic="first-aid" onclick="showVideos('first-aid')">First Aid</a></li>
+                <li><a href="#" data-topic="rights" onclick="showVideos('rights')">Rights</a></li>
             </ul>
         </aside>
-
+    
         <!-- Main Content Area -->
         <div class="content">
             <h1 id="topic-title">Welcome to the Learning Hub</h1>
             <p id="topic-description">Select a topic from the sidebar to start learning.</p>
-
+    
             <!-- Video Embed Section -->
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/X7psrU1-v7k?si=RQkT2c3zj8DWQeFZ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/pAuyDaUTnM4?si=PWSfCo3NApI24FpX" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-            </div>
-
-            <!-- Form to Add More Videos (Visible only to admins) -->
-            <div class="add-video-form" id="add-video-form" style="display: none;">
-                <h3>Add a Video</h3>
-                <input type="text" id="video-url" placeholder="Enter YouTube video URL" />
-                <button id="add-video-btn" class="btn">Add Video</button>
+            <div id="video-section">
+                <h2 id="video-title">Videos</h2>
+                <div id="videos-container">
+                    <!-- Videos will be dynamically inserted here -->
+                </div>
             </div>
         </div>
     </div>
+    
+    <script>
+        function showVideos(topic) {
+            const videosContainer = document.getElementById('videos-container');
+            let videosHtml = '';
+    
+            switch (topic) {
+                case 'how-to-ride':
+                    videosHtml = `
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/VIDEO_ID_1" title="How to Ride - Video 1" frameborder="0" allowfullscreen></iframe>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/VIDEO_ID_2" title="How to Ride - Video 2" frameborder="0" allowfullscreen></iframe>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/VIDEO_ID_3" title="How to Ride - Video 3" frameborder="0" allowfullscreen></iframe>
+                    `;
+                    break;
+                case 'road-safety':
+                    videosHtml = `
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/VIDEO_ID_4" title="Road Safety - Video 1" frameborder="0" allowfullscreen></iframe>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/VIDEO_ID_5" title="Road Safety - Video 2" frameborder="0" allowfullscreen></iframe>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/VIDEO_ID_6" title="Road Safety - Video 3" frameborder="0" allowfullscreen></iframe>
+                    `;
+                    break;
+                case 'first-aid':
+                    videosHtml = `
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/VIDEO_ID_7" title="First Aid - Video 1" frameborder="0" allowfullscreen></iframe>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/VIDEO_ID_8" title="First Aid - Video 2" frameborder="0" allowfullscreen></iframe>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/VIDEO_ID_9" title="First Aid - Video 3" frameborder="0" allowfullscreen></iframe>
+                    `;
+                    break;
+                case 'rights':
+                    videosHtml = `
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/VIDEO_ID_10" title="Rights - Video 1" frameborder="0" allowfullscreen></iframe>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/VIDEO_ID_11" title="Rights - Video 2" frameborder="0" allowfullscreen></iframe>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/VIDEO_ID_12" title="Rights - Video 3" frameborder="0" allowfullscreen></iframe>
+                    `;
+                    break;
+                default:
+                    videosHtml = '<p>No videos available for this topic.</p>';
+            }
+    
+            videosContainer.innerHTML = videosHtml;
+            document.getElementById('topic-title').innerText = topic.charAt(0).toUpperCase() + topic.slice(1).replace(/-/g, ' ');
+            document.getElementById('topic-description'). innerText = `Explore the videos related to ${topic.charAt(0).toUpperCase() + topic.slice(1).replace(/-/g, ' ')}.`;
+        }
+    </script>
 
     <!--------------- Footer ------------------>
 
@@ -198,78 +237,5 @@
         </script>
 
     <script src="/js/responsive.js"></script>
-
-    <script>
-        // Define user role (for demonstration purposes)
-        const userRole = "admin"; // Change to "user" to test non-admin behavior
-
-        // Video data structure
-        const topics = {
-            "How to ride": ["dQw4w9WgXcQ"],
-            "Road safety": ["3fumBcKC6RE"],
-            "First Aid": ["1zYwPp7P4iE"],
-            "Rights": ["5qap5aO4i9A"]
-        };
-
-        // Add event listener to the hamburger menu
-        document.querySelector('.hamberger').addEventListener('click', function() {
-            document.querySelector('.nav-list').classList.toggle('active');
-        });
-
-        // Function to load videos for the selected topic
-        function loadVideos(topic) {
-            const videoContainer = document.getElementById('video-container');
-            videoContainer.innerHTML = ''; // Clear existing videos
-            topics[topic].forEach(videoId => {
-                const iframe = document.createElement('iframe');
-                iframe.width = "560";
-                iframe.height = "315";
-                iframe.src = `https://www.youtube.com/embed/${videoId}`;
-                iframe.frameBorder = "0";
-                iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
-                iframe.allowFullscreen = true;
-                videoContainer.appendChild(iframe);
-            });
-        }
-
-        // Add event listener to the topic links
-        document.querySelectorAll('.sidebar a').forEach(function(link) {
-            link.addEventListener('click', function(event) {
-                event.preventDefault(); // Prevent default anchor behavior
-
-                // Get the topic name
-                const topicName = link.innerHTML;
-
-                // Update the topic title and description
-                document.getElementById('topic-title').innerHTML = topicName;
-                document.getElementById('topic-description').innerHTML = 'This is the description for ' + topicName;
-
-                // Load videos for the selected topic
-                loadVideos(topicName);
-            });
-        });
-
-        // Show the Add Video section only for admins
-        if (userRole === "admin") {
-            document.getElementById('add-video-form').style.display = 'block';
-        }
-
-        // Add event listener for adding new videos
-        document.getElementById('add-video-btn').addEventListener('click', function() {
-            const videoUrl = document.getElementById('video-url').value;
-            const videoId = videoUrl.split('v=')[1]?.split('&')[0]; // Extract video ID from URL
-
-            // Get the current topic
-            const currentTopic = document.getElementById('topic-title').innerHTML;
-
-            if (videoId && topics[currentTopic]) {
-                topics[currentTopic].push(videoId); // Add the new video ID to the current topic
-                loadVideos(currentTopic); // Reload videos to show the new one
-                document.getElementById('video-url').value = ''; // Clear input field
-            } else {
-                alert('Please enter a valid YouTube video URL.');
-            }
-        });
-    </script>
 </body>
 </html>
