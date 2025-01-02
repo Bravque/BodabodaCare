@@ -1,111 +1,94 @@
-/* Basic styles for better visuals */
 :root {
   /*------------ Colors -------------*/
-  --primary-color: #963cdd;     /*---- Purple ----*/
-  --secondary-color: #1668b8;   /*---- Blue ------*/
-  --third-color: #000000;       /*----- Black ------*/
-  --fourth-color: #ffffff;      /*---- White ------*/
-  --blue-color: #2540ce;        /*---- Button Blue -----*/
-  --yellow-color: #fcb900;      /*---- Button Yellow ----*/
+  --primary-color: #963cdd;     /* Purple */
+  --secondary-color: #1668b8;   /* Blue */
+  --third-color: #000000;       /* Black */
+  --fourth-color: #ffffff;      /* White */
+  --blue-color: #2540ce;        /* Button Blue */
+  --yellow-color: #fcb900;      /* Button Yellow */
+  --dark-blue-color: #0a114f;   /* Dark Blue */
+  --light-blue-color: #87ceeb;  /* Light Blue */
+  --dark-gray-color: #333333;   /* Dark Gray */
+  --light-gray-color: #f7f7f7;  /* Light Gray */
 
-  /*------------ Font Size --------------*/
-  --heading-font-size: 1.5rem;
+  /*------------ Font Sizes -------------*/
+  --heading-font-size: 2.2rem;
   --paragraph-font-size: 1rem;
+  --small-font-size: 0.8rem;
+
+  /*------------ Spacing -------------*/
+  --spacing-small: 10px;
+  --spacing-medium: 20px;
+  --spacing-large: 30px;
+
+  /*------------ Shadows -------------*/
+  --box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-body {
-  font-family: 'Arial', sans-serif; /* Use a more modern font */
-  margin: 0;
-  padding: 0;
-  background-color: var(--fourth-color); /* Use a lighter background color */
-  color: var(--third-color); /* Set text color for better contrast */
-}
-
-.brand img {
-  width: 5rem;
-  height: 5rem;
-}
-
-nav {
-  background-color: var(--secondary-color); /* Keep the blue color */
-  color: var(--fourth-color); /* Use white text */
-  padding: 10px;
-  height: 60px; /* Set a fixed height for the nav */
-  position: fixed;
-  width: 100%; /* Make the nav full width */
-  z-index: 10; /* Ensure nav stays on top */
-  display: flex; /* Use flexbox for better alignment */
-  justify-content: space-between; /* Evenly space content */
-  align-items: center; /* Center items vertically */
-}
-
-.menu-container.nav-wrapper {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%; /* Ensure it takes full width */
-}
-
-nav .nav-list {
-  list-style: none;
-  padding: 0;
-  margin: 0; /* Remove default margin */
-}
-
-nav .nav-list li {
-  display: inline-block; /* Make each item a block for better spacing */
-  margin-right: 20px; /* Add space between items */
-}
-
-nav .nav-list a {
-  color: var(--fourth-color); /* Use white text color */
-  text-decoration: none;
-  font-size: var(--paragraph-font-size); /* Adjust font size */
-  transition: color 0.3s ease; /* Add a smooth transition for hover effect */
-}
-
-nav .nav-list a:hover {
-  color: var(--primary-color); /* Change color on hover */
-}
-
+/*------------ Container Layout -------------*/
 .container {
   display: flex;
-  margin: 80px 20px 20px; /* Add top margin to avoid overlap with fixed nav */
+  height: 100vh; /* Full viewport height */
+  gap: var(--spacing-medium); /* Space between sidebar and content */
+  padding: var(--spacing-medium);
+  background-color: var(--light-gray-color); /* Light gray background */
 }
 
+/*------------ Sidebar -------------*/
 .sidebar {
-  width: 25%; /* Adjust the sidebar width */
-  background: var(--fourth-color); /* White background */
-  padding: 15px;
+  width: 25%; /* Sidebar width */
+  background-color: var(--secondary-color); /* Blue background */
+  padding: var(--spacing-medium);
   border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  margin-right: 20px; /* Add space between sidebar and content */
+  box-shadow: var(--box-shadow);
+  color: var(--fourth-color); /* White text */
+}
+.sidebar ul {
+  list-style:square; /* Remove default list styling */
+  padding: 0;
+}
+.sidebar ul li a {
+  color: var(--fourth-color); /* White color for links */
+  font-size: var(--paragraph-font-size);
+  font-weight: bold;
+  text-decoration: none;
+  padding-top: 20px;
+  transition: color 0.3s ease; /* Smooth color transition on hover */
+}
+.sidebar ul li a:hover {
+  color: var(--yellow-color); /* Yellow color on hover */
 }
 
+/*------------ Content Area -------------*/
 .content {
-  flex: 1; /* Allow content to take remaining space */
-  padding: 15px;
-  background: var(--fourth-color); /* White background */
+  flex: 1; /* Take remaining space */
+  padding: var(--spacing-medium);
+  background-color: var(--fourth-color); /* White background */
   border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--box-shadow);
+  overflow-y: auto; /* Enable vertical scrolling */
 }
 
+
+
+/*------------ Video Container -------------*/
 .video-container {
-  margin-top: 20px;
+  margin-top: var(--spacing-medium);
 }
 
-.btn {
-  background-color: var(--yellow-color); /* Keep the yellow button color */
-  color: var(--fourth-color); /* Use white text */
-  border: none;
-  padding: 10px 15px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: var(--paragraph-font-size); /* Adjust font size */
-  transition: background-color 0.3s ease; /* Add a smooth transition */
+.sidebar ul li a:hover {
+  color: var(--yellow-color); /* Yellow color on hover */
 }
 
-.btn a {
-  color: var(--fourth-color); /* Use white text color */
-  text-decoration: none; /* Change to none for better visibility */
+/*------------ Responsive Adjustments -------------*/
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column; /* Stack sidebar and content on smaller screens */
+    height: auto; /* Allow container to grow with content */
+  }
+
+  .sidebar {
+    width: 100%; /* Full width for sidebar on smaller screens */
+    margin-bottom: var(--spacing-medium); /* Add space below sidebar */
+  }
 }

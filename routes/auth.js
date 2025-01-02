@@ -6,7 +6,7 @@ const { registerUser, loginUser, logoutUser } = require('../controllers/authCont
 console.log(registerUser , loginUser , logoutUser );
 
 //user registration
-router.post('/submit_registration', registerUser ); // Corrected route
+router.post('/submit_registration', registerUser ); 
 
 //user login 
 router.post('/login', loginUser );

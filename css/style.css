@@ -263,6 +263,19 @@ nav ul.dropdown-list {
     color: var(--third-color);
 }
 
+@media (max-width: 768px) {
+    .hamberger {
+        display: block;
+    }
+}
+
+@media (max-width: 480px) {
+    .hamberger {
+        display: block;
+    }
+}
+
+
 /*----------- Scroll to Top --------------*/
 #topBtn {
     position: fixed;

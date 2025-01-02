@@ -1,7 +1,7 @@
 /*------------------ Breadcrumb styling --------------------*/
 .breadcrumbs
 {
-	background: linear-gradient(rgba(150, 60, 221, 0.1), rgba(17, 17, 69, 0.8)), url('../img/contact-bc.png');
+	background: linear-gradient(rgba(150, 60, 221, 0.1), rgba(17, 17, 69, 0.8)), url('../img/contactus.jpeg');
 	background-position: center top;
 	background-repeat: no-repeat;
 	background-size: cover;
@@ -89,6 +89,9 @@
 .branch-img
 {
 	margin: 1rem 0;
+	width: 100%;
+	height: 20rem;
+	object-fit: fit;
 }
 
 .branch-card
