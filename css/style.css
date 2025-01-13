@@ -33,6 +33,7 @@ html {
 
 body {
     font-family: 'Poppins', sans-serif;
+    overflow-x: hidden;
 }
 
 .container {
@@ -608,6 +609,16 @@ nav ul.dropdown-list {
     .partner-img-container {
         width: 45%;  /* 2 items per row */
     }
+    .nav-list {
+        display: none;
+        flex-direction: column;
+    }
+    .hamberger {
+        display: block;
+    }
+    .services .partners-grid {
+        grid-template-columns: 1fr; /* 1 column on small screens */
+    }
 }
 
 @media (max-width: 480px) {
@@ -621,13 +632,6 @@ nav ul.dropdown-list {
         grid-template-columns: repeat(2, 1fr); /* 2 columns on medium screens */
     }
 }
-
-@media (max-width: 768px) {
-    .services .partners-grid {
-        grid-template-columns: 1fr; /* 1 column on small screens */
-    }
-}
-
 
 
 /*----------------- Testimonial Section Styling --------------*/
